@@ -41,8 +41,8 @@ const links = computed(() => [
     <!-- Columns -->
     <div class="container-page py-16 grid gap-12 md:grid-cols-12">
       <div class="md:col-span-5">
-        <div class="flex items-center gap-3">
-          <img :src="company.logo" alt="EYANO GROUP" class="h-12 w-12 rounded-full object-cover ring-1 ring-brand-gold/40" />
+        <div class="flex items-center gap-4">
+          <img :src="company.logo" alt="EYANO GROUP" class="h-14 w-auto object-contain" />
           <span class="font-display font-semibold text-xl text-white tracking-tight">
             EYANO <span class="text-brand-gold">GROUP</span>
           </span>

@@ -42,7 +42,7 @@ const { t } = useI18n()
       <p class="font-display text-2xl sm:text-3xl text-white leading-tight">
         « {{ t('company.slogan') }} »
       </p>
-      <img :src="company.logo" alt="EYANO GROUP" class="h-14 w-14 rounded-full object-cover ring-2 ring-brand-gold/60" />
+      <img :src="company.logo" alt="EYANO GROUP" class="h-16 w-auto object-contain" />
     </div>
   </section>
 
