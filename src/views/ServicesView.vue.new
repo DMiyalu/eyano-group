@@ -1,0 +1,64 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+import { RouterLink } from 'vue-router'
+import { services } from '@/data/company'
+
+const { t } = useI18n()
+</script>
+
+<template>
+  <!-- Page hero -->
+  <section class="bg-brand-cream border-b border-brand-ink/10">
+    <div class="container-page py-24 lg:py-32 grid lg:grid-cols-12 gap-10 items-end">
+      <div class="lg:col-span-8">
+        <p class="eyebrow">{{ t('nav.services') }}</p>
+        <h1 class="display-1 mt-6">{{ t('services.title') }}</h1>
+      </div>
+      <div class="lg:col-span-4">
+        <p class="lead">{{ t('services.subtitle') }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Service entries -->
+  <section>
+    <article
+      v-for="(s, i) in services"
+      :key="s.key"
+      class="border-b border-brand-ink/10"
+      :class="i % 2 === 1 ? 'bg-brand-paper/60' : 'bg-white'"
+    >
+      <div class="container-page py-20 lg:py-28 grid lg:grid-cols-12 gap-10 items-start">
+        <div class="lg:col-span-4">
+          <p class="font-display text-6xl lg:text-7xl text-brand-gold-dark leading-none">
+            0{{ i + 1 }}
+          </p>
+        </div>
+        <div class="lg:col-span-7 lg:col-start-6">
+          <p class="eyebrow">Domaine {{ i + 1 }} / {{ services.length }}</p>
+          <h2 class="display-2 mt-5">{{ t(`services.${s.key}.title`) }}</h2>
+          <p class="mt-8 lead">{{ t(`services.${s.key}.desc`) }}</p>
+          <RouterLink to="/contact" class="mt-10 link-arrow">
+            {{ t('common.contactUs') }}
+            <span aria-hidden="true">→</span>
+          </RouterLink>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-brand-ink text-white">
+    <div class="container-page py-20 lg:py-28 grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-8">
+        <h2 class="display-2 text-white">Un projet ? Construisons-le ensemble.</h2>
+      </div>
+      <div class="lg:col-span-4 lg:text-right">
+        <RouterLink to="/contact" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold bg-brand-gold text-brand-ink hover:bg-white transition rounded-sm">
+          {{ t('common.contactUs') }}
+          <span aria-hidden="true">→</span>
+        </RouterLink>
+      </div>
+    </div>
+  </section>
+</template>

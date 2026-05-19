@@ -2,7 +2,6 @@
 import { reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { company } from '@/data/company'
-import SectionHeader from '@/components/ui/SectionHeader.vue'
 
 const { t } = useI18n()
 
@@ -10,7 +9,6 @@ const form = reactive({ name: '', email: '', message: '' })
 const sent = ref(false)
 
 function submit() {
-  // Compose a mailto with the form contents (no backend yet)
   const subject = encodeURIComponent(`Contact website — ${form.name}`)
   const body = encodeURIComponent(
     `${form.message}\n\n—\n${form.name}\n${form.email}`,
@@ -21,49 +19,45 @@ function submit() {
 </script>
 
 <template>
-  <section class="section bg-brand-cream/40">
-    <div class="container-page">
-      <SectionHeader
-        align="center"
-        :eyebrow="t('nav.contact')"
-        :title="t('contact.title')"
-        :subtitle="t('contact.subtitle')"
-      />
+  <!-- INTRO -->
+  <section class="bg-brand-cream">
+    <div class="container-page py-20 sm:py-28 lg:py-32">
+      <div class="flex items-center gap-3">
+        <span class="rule-gold"></span>
+        <p class="eyebrow">{{ t('nav.contact') }}</p>
+      </div>
+      <h1 class="display-1 mt-8 max-w-4xl">{{ t('contact.title') }}</h1>
+      <p class="lead mt-8 max-w-3xl">{{ t('contact.subtitle') }}</p>
     </div>
   </section>
 
+  <!-- CONTACT BLOCK -->
   <section class="section">
-    <div class="container-page grid lg:grid-cols-[1fr_1.2fr] gap-10">
-      <!-- Coordonnées -->
-      <div class="space-y-4">
-        <div class="card">
-          <p class="text-xs font-bold uppercase tracking-widest text-brand-gold-dark">
-            {{ t('contact.phone') }}
-          </p>
-          <a :href="company.phoneHref" class="mt-2 inline-block text-lg font-semibold text-brand-ink hover:text-brand-gold-dark">
+    <div class="container-page grid lg:grid-cols-12 gap-12 lg:gap-16">
+      <!-- Infos -->
+      <aside class="lg:col-span-5 space-y-10">
+        <div class="border-t border-brand-ink/15 pt-6">
+          <p class="eyebrow">{{ t('contact.phone') }}</p>
+          <a :href="company.phoneHref" class="mt-3 block font-display text-2xl text-brand-ink hover:text-brand-gold-dark transition-colors">
             {{ company.phone }}
           </a>
         </div>
-        <div class="card">
-          <p class="text-xs font-bold uppercase tracking-widest text-brand-gold-dark">
-            {{ t('contact.email') }}
-          </p>
-          <a :href="company.emailHref" class="mt-2 inline-block text-lg font-semibold text-brand-ink hover:text-brand-gold-dark break-all">
+        <div class="border-t border-brand-ink/15 pt-6">
+          <p class="eyebrow">{{ t('contact.email') }}</p>
+          <a :href="company.emailHref" class="mt-3 block font-display text-2xl text-brand-ink hover:text-brand-gold-dark transition-colors break-all">
             {{ company.email }}
           </a>
         </div>
-        <div class="card">
-          <p class="text-xs font-bold uppercase tracking-widest text-brand-gold-dark">
-            {{ t('contact.address') }}
-          </p>
-          <p class="mt-2 text-lg font-semibold text-brand-ink">{{ company.address }}</p>
+        <div class="border-t border-brand-ink/15 pt-6">
+          <p class="eyebrow">{{ t('contact.address') }}</p>
+          <p class="mt-3 font-display text-2xl text-brand-ink">{{ company.address }}</p>
         </div>
-      </div>
+      </aside>
 
-      <!-- Formulaire -->
-      <form @submit.prevent="submit" class="card space-y-5">
+      <!-- Form -->
+      <form @submit.prevent="submit" class="lg:col-span-7 bg-brand-paper p-8 sm:p-10 space-y-6">
         <div>
-          <label for="name" class="block text-sm font-medium text-slate-700 mb-1">
+          <label for="name" class="eyebrow block mb-3">
             {{ t('contact.formName') }}
           </label>
           <input
@@ -71,11 +65,11 @@ function submit() {
             v-model="form.name"
             type="text"
             required
-            class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none"
+            class="w-full bg-white border border-brand-ink/20 px-4 py-3 text-base focus:border-brand-ink focus:ring-0 outline-none"
           />
         </div>
         <div>
-          <label for="email" class="block text-sm font-medium text-slate-700 mb-1">
+          <label for="email" class="eyebrow block mb-3">
             {{ t('contact.formEmail') }}
           </label>
           <input
@@ -83,27 +77,27 @@ function submit() {
             v-model="form.email"
             type="email"
             required
-            class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none"
+            class="w-full bg-white border border-brand-ink/20 px-4 py-3 text-base focus:border-brand-ink focus:ring-0 outline-none"
           />
         </div>
         <div>
-          <label for="message" class="block text-sm font-medium text-slate-700 mb-1">
+          <label for="message" class="eyebrow block mb-3">
             {{ t('contact.formMessage') }}
           </label>
           <textarea
             id="message"
             v-model="form.message"
-            rows="5"
+            rows="6"
             required
-            class="w-full rounded-xl border border-slate-200 px-4 py-3 text-sm focus:border-brand-gold focus:ring-2 focus:ring-brand-gold/30 outline-none"
+            class="w-full bg-white border border-brand-ink/20 px-4 py-3 text-base focus:border-brand-ink focus:ring-0 outline-none resize-y"
           ></textarea>
         </div>
 
         <button type="submit" class="btn-primary w-full sm:w-auto">
-          {{ t('contact.formSubmit') }}
+          {{ t('contact.formSubmit') }} →
         </button>
 
-        <p v-if="sent" class="text-sm text-green-700 bg-green-50 border border-green-200 rounded-xl px-4 py-3">
+        <p v-if="sent" class="text-sm text-brand-ink bg-brand-gold/20 border-l-4 border-brand-gold px-4 py-3">
           {{ t('contact.formSuccess') }}
         </p>
       </form>

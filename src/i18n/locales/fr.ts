@@ -18,6 +18,7 @@ export default {
     location: 'Kinshasa, République Démocratique du Congo',
   },
   home: {
+    heroEyebrow: 'L’Excellence au service du développement',
     heroTitle: 'Créativité, entrepreneuriat et impact social',
     heroSubtitle:
       'EYANO GROUP est une structure multisectorielle qui transforme les idées en réalisations concrètes au service du développement.',

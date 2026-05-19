@@ -1,0 +1,61 @@
+<script setup lang="ts">
+import { useI18n } from 'vue-i18n'
+import { RouterLink } from 'vue-router'
+
+const { t, tm, rt } = useI18n()
+
+const items = (tm('whyUs.items') as unknown as string[]).map((_, i) =>
+  rt(`whyUs.items[${i}]` as never),
+)
+</script>
+
+<template>
+  <!-- Page hero -->
+  <section class="bg-brand-cream border-b border-brand-ink/10">
+    <div class="container-page py-24 lg:py-32 grid lg:grid-cols-12 gap-10 items-end">
+      <div class="lg:col-span-8">
+        <p class="eyebrow">{{ t('nav.whyUs') }}</p>
+        <h1 class="display-1 mt-6">{{ t('whyUs.title') }}</h1>
+      </div>
+      <div class="lg:col-span-4">
+        <p class="lead">{{ t('whyUs.subtitle') }}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Numbered list -->
+  <section class="section">
+    <div class="container-page">
+      <ol class="grid md:grid-cols-2 gap-px bg-brand-ink/10 border border-brand-ink/10">
+        <li
+          v-for="(item, i) in items"
+          :key="item"
+          class="bg-white p-8 lg:p-12 flex items-start gap-8"
+        >
+          <span class="font-display text-5xl lg:text-6xl text-brand-gold-dark leading-none">
+            {{ String(i + 1).padStart(2, '0') }}
+          </span>
+          <p class="font-display text-xl lg:text-2xl text-brand-ink leading-snug pt-2">
+            {{ item }}
+          </p>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-brand-ink text-white">
+    <div class="container-page py-20 lg:py-28 grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-8">
+        <span class="rule-gold mb-6"></span>
+        <h2 class="display-2 text-white">Prêts à collaborer avec nous ?</h2>
+      </div>
+      <div class="lg:col-span-4 lg:text-right">
+        <RouterLink to="/contact" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold bg-brand-gold text-brand-ink hover:bg-white transition rounded-sm">
+          {{ t('common.contactUs') }}
+          <span aria-hidden="true">→</span>
+        </RouterLink>
+      </div>
+    </div>
+  </section>
+</template>

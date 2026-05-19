@@ -1,0 +1,140 @@
+<script setup lang="ts">
+import { RouterLink } from 'vue-router'
+import { useI18n } from 'vue-i18n'
+import { services, values } from '@/data/company'
+
+const { t } = useI18n()
+</script>
+
+<template>
+  <!-- HERO — éditorial, plein cadre -->
+  <section class="relative bg-brand-cream overflow-hidden">
+    <div class="container-page pt-20 pb-24 lg:pt-28 lg:pb-32 grid lg:grid-cols-12 gap-12 items-end">
+      <div class="lg:col-span-8">
+        <p class="eyebrow">{{ t('company.location') }}</p>
+        <h1 class="display-1 mt-6">
+          <span class="block">{{ t('home.heroTitle') }}</span>
+        </h1>
+        <p class="mt-8 lead max-w-2xl">
+          {{ t('home.heroSubtitle') }}
+        </p>
+        <div class="mt-10 flex flex-wrap gap-4">
+          <RouterLink to="/services" class="btn-primary">
+            {{ t('common.discoverServices') }}
+            <span aria-hidden="true">→</span>
+          </RouterLink>
+          <RouterLink to="/contact" class="btn-secondary">
+            {{ t('common.contactUs') }}
+          </RouterLink>
+        </div>
+      </div>
+
+      <div class="lg:col-span-4 hidden lg:block">
+        <figure class="border-l-4 border-brand-gold pl-6">
+          <p class="font-display italic text-2xl text-brand-ink leading-snug">
+            « {{ t('company.slogan') }} »
+          </p>
+          <figcaption class="mt-4 text-xs uppercase tracking-[0.2em] text-slate-500">— EYANO GROUP</figcaption>
+        </figure>
+      </div>
+    </div>
+
+    <!-- Bottom rule -->
+    <div class="border-t border-brand-ink/10"></div>
+  </section>
+
+  <!-- INTRO / WHO -->
+  <section class="section">
+    <div class="container-page grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-4">
+        <p class="eyebrow">{{ t('nav.about') }}</p>
+        <h2 class="display-3 mt-6">{{ t('home.aboutTitle') }}</h2>
+      </div>
+      <div class="lg:col-span-7 lg:col-start-6">
+        <p class="lead">{{ t('home.aboutText') }}</p>
+        <RouterLink to="/a-propos" class="link-arrow mt-8">
+          {{ t('common.learnMore') }}
+          <span aria-hidden="true">→</span>
+        </RouterLink>
+      </div>
+    </div>
+  </section>
+
+  <!-- VALUES STRIP -->
+  <section class="bg-brand-paper border-y border-brand-ink/10">
+    <div class="container-page py-20">
+      <p class="eyebrow text-center">{{ t('about.valuesTitle') }}</p>
+      <div class="mt-12 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 divide-x divide-brand-ink/10 border-y border-brand-ink/10">
+        <div
+          v-for="v in values"
+          :key="v.key"
+          class="px-4 py-8 text-center"
+        >
+          <p class="font-display text-2xl text-brand-ink leading-tight">
+            {{ t(`values.${v.key}.title`) }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES — éditorial -->
+  <section class="section">
+    <div class="container-page">
+      <div class="grid lg:grid-cols-12 gap-12 mb-16">
+        <div class="lg:col-span-6">
+          <p class="eyebrow">{{ t('nav.services') }}</p>
+          <h2 class="display-2 mt-6">{{ t('home.servicesTitle') }}</h2>
+        </div>
+        <div class="lg:col-span-5 lg:col-start-8 flex items-end">
+          <p class="lead">{{ t('home.servicesSubtitle') }}</p>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 border-t border-brand-ink/15">
+        <article
+          v-for="(s, i) in services"
+          :key="s.key"
+          class="group relative p-8 border-b border-brand-ink/15 sm:border-r last:border-r-0 hover:bg-brand-cream transition-colors"
+          :class="{
+            'sm:border-r-0 lg:border-r': i === 1,
+            'lg:border-r-0': i === 3,
+          }"
+        >
+          <span class="font-display text-sm text-brand-gold-dark">
+            0{{ i + 1 }}
+          </span>
+          <h3 class="mt-6 font-display text-2xl text-brand-ink leading-tight">
+            {{ t(`services.${s.key}.title`) }}
+          </h3>
+          <p class="mt-4 text-slate-600 text-sm leading-relaxed">
+            {{ t(`services.${s.key}.desc`) }}
+          </p>
+          <RouterLink to="/services" class="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-brand-ink group-hover:text-brand-gold-dark transition">
+            {{ t('common.readMore') }}
+            <span aria-hidden="true">→</span>
+          </RouterLink>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FULL BLEED -->
+  <section class="bg-brand-ink text-white">
+    <div class="container-page py-24 lg:py-32 grid lg:grid-cols-12 gap-10 items-center">
+      <div class="lg:col-span-8">
+        <span class="rule-gold mb-6"></span>
+        <h2 class="display-2 text-white">{{ t('home.ctaTitle') }}</h2>
+        <p class="mt-6 lead text-slate-300 max-w-2xl">
+          {{ t('home.ctaText') }}
+        </p>
+      </div>
+      <div class="lg:col-span-4 lg:text-right">
+        <RouterLink to="/contact" class="inline-flex items-center justify-center gap-2 px-8 py-4 text-sm font-semibold uppercase tracking-wider bg-brand-gold text-brand-ink hover:bg-white transition rounded-sm">
+          {{ t('common.contactUs') }}
+          <span aria-hidden="true">→</span>
+        </RouterLink>
+      </div>
+    </div>
+  </section>
+</template>

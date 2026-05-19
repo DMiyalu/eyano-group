@@ -3,88 +3,98 @@ import { RouterLink } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { company, services, values } from '@/data/company'
 import FeatureCard from '@/components/ui/FeatureCard.vue'
-import SectionHeader from '@/components/ui/SectionHeader.vue'
 
 const { t } = useI18n()
 </script>
 
 <template>
-  <!-- HERO -->
-  <section class="relative overflow-hidden bg-gradient-to-br from-brand-cream via-white to-white">
-    <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-brand-gold/10 blur-3xl" aria-hidden="true"></div>
-    <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-brand-blue/10 blur-3xl" aria-hidden="true"></div>
-
-    <div class="container-page relative grid lg:grid-cols-2 gap-12 items-center py-20 sm:py-24 lg:py-28">
-      <div>
-        <p class="text-xs font-bold uppercase tracking-widest text-brand-gold-dark">
-          {{ t('company.location') }}
-        </p>
-        <h1 class="mt-3 font-display text-4xl sm:text-5xl lg:text-6xl font-extrabold text-brand-ink leading-tight">
-          {{ t('home.heroTitle') }}
-        </h1>
-        <p class="mt-6 text-lg text-slate-600 max-w-xl">
-          {{ t('home.heroSubtitle') }}
-        </p>
-        <div class="mt-8 flex flex-wrap gap-3">
-          <RouterLink to="/services" class="btn-primary">
-            {{ t('common.discoverServices') }}
-          </RouterLink>
-          <RouterLink to="/contact" class="btn-ghost">
-            {{ t('common.contactUs') }}
-          </RouterLink>
+  <!-- HERO — editorial, full-bleed -->
+  <section class="bg-brand-cream">
+    <div class="container-page pt-16 pb-20 sm:pt-24 sm:pb-28 lg:pt-32 lg:pb-36">
+      <div class="grid lg:grid-cols-12 gap-12 items-end">
+        <div class="lg:col-span-8">
+          <div class="flex items-center gap-3">
+            <span class="rule-gold"></span>
+            <p class="eyebrow">{{ t('home.heroEyebrow') }}</p>
+          </div>
+          <h1 class="display-1 mt-8">
+            {{ t('home.heroTitle') }}
+          </h1>
         </div>
-        <p class="mt-8 italic text-sm text-brand-blue">
-          « {{ t('company.slogan') }} »
-        </p>
-      </div>
-
-      <div class="relative">
-        <div class="aspect-square mx-auto max-w-md rounded-3xl bg-gradient-to-br from-brand-gold via-amber-400 to-brand-red p-1 shadow-2xl">
-          <div class="w-full h-full rounded-[1.4rem] bg-white flex items-center justify-center p-8">
-            <img :src="company.logo" alt="EYANO GROUP" class="w-full h-full object-contain" />
+        <div class="lg:col-span-4">
+          <p class="lead">{{ t('home.heroSubtitle') }}</p>
+          <div class="mt-8 flex flex-wrap gap-4">
+            <RouterLink to="/services" class="btn-primary">
+              {{ t('common.discoverServices') }}
+            </RouterLink>
+            <RouterLink to="/contact" class="btn-secondary">
+              {{ t('common.contactUs') }}
+            </RouterLink>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ABOUT PREVIEW -->
+  <!-- SLOGAN BAR -->
+  <section class="bg-brand-ink text-white">
+    <div class="container-page py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+      <p class="font-display text-2xl sm:text-3xl text-white leading-tight">
+        « {{ t('company.slogan') }} »
+      </p>
+      <img :src="company.logo" alt="EYANO GROUP" class="h-14 w-14 rounded-full object-cover ring-2 ring-brand-gold/60" />
+    </div>
+  </section>
+
+  <!-- ABOUT — editorial split -->
   <section class="section">
-    <div class="container-page grid lg:grid-cols-2 gap-12 items-center">
-      <div>
-        <SectionHeader :eyebrow="t('nav.about')" :title="t('home.aboutTitle')" />
-        <p class="mt-6 text-slate-600 leading-relaxed">
-          {{ t('home.aboutText') }}
-        </p>
-        <RouterLink to="/a-propos" class="btn-secondary mt-8">
-          {{ t('common.learnMore') }}
-        </RouterLink>
-      </div>
-      <div class="grid grid-cols-2 gap-4">
-        <div v-for="v in values.slice(0, 4)" :key="v.key" class="card text-center">
-          <div class="text-3xl">{{ v.icon }}</div>
-          <p class="mt-2 font-semibold text-brand-ink text-sm">
-            {{ t(`values.${v.key}.title`) }}
-          </p>
+    <div class="container-page grid lg:grid-cols-12 gap-12">
+      <div class="lg:col-span-5">
+        <div class="flex items-center gap-3">
+          <span class="rule-gold"></span>
+          <p class="eyebrow">{{ t('nav.about') }}</p>
         </div>
+        <h2 class="display-2 mt-6">{{ t('home.aboutTitle') }}</h2>
+      </div>
+      <div class="lg:col-span-7 lg:pl-8">
+        <p class="lead">{{ t('home.aboutText') }}</p>
+        <div class="mt-8 grid grid-cols-2 gap-x-8 gap-y-6">
+          <div
+            v-for="v in values.slice(0, 4)"
+            :key="v.key"
+            class="border-t border-brand-ink/15 pt-4"
+          >
+            <p class="font-display text-xl text-brand-ink">{{ t(`values.${v.key}.title`) }}</p>
+          </div>
+        </div>
+        <RouterLink to="/a-propos" class="link-arrow mt-10">
+          {{ t('common.learnMore') }} →
+        </RouterLink>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section class="section bg-brand-cream/40">
-    <div class="container-page">
-      <SectionHeader
-        align="center"
-        :eyebrow="t('nav.services')"
-        :title="t('home.servicesTitle')"
-        :subtitle="t('home.servicesSubtitle')"
-      />
-      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+  <!-- SERVICES — editorial grid -->
+  <section class="bg-brand-paper">
+    <div class="container-page py-20 sm:py-28 lg:py-32">
+      <div class="grid lg:grid-cols-12 gap-12 items-end mb-16">
+        <div class="lg:col-span-7">
+          <div class="flex items-center gap-3">
+            <span class="rule-gold"></span>
+            <p class="eyebrow">{{ t('nav.services') }}</p>
+          </div>
+          <h2 class="display-2 mt-6">{{ t('home.servicesTitle') }}</h2>
+        </div>
+        <div class="lg:col-span-5">
+          <p class="lead">{{ t('home.servicesSubtitle') }}</p>
+        </div>
+      </div>
+
+      <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-px bg-brand-ink/10">
         <FeatureCard
-          v-for="s in services"
+          v-for="(s, i) in services"
           :key="s.key"
-          :icon="s.icon"
+          :index="i + 1"
           :title="t(`services.${s.key}.title`)"
           :description="t(`services.${s.key}.desc`)"
         />
@@ -92,18 +102,21 @@ const { t } = useI18n()
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="section">
-    <div class="container-page">
-      <div class="relative overflow-hidden rounded-3xl bg-brand-ink text-white p-10 sm:p-14 shadow-xl">
-        <div class="absolute -top-16 -right-16 w-72 h-72 rounded-full bg-brand-gold/20 blur-3xl" aria-hidden="true"></div>
-        <div class="relative max-w-2xl">
-          <h2 class="font-display text-3xl sm:text-4xl font-bold">{{ t('home.ctaTitle') }}</h2>
-          <p class="mt-4 text-slate-300">{{ t('home.ctaText') }}</p>
-          <RouterLink to="/contact" class="btn-primary mt-8">
-            {{ t('common.contactUs') }}
-          </RouterLink>
+  <!-- CTA — full-bleed dark -->
+  <section class="bg-brand-ink text-white">
+    <div class="container-page py-20 sm:py-28 grid lg:grid-cols-12 gap-12 items-center">
+      <div class="lg:col-span-8">
+        <div class="flex items-center gap-3">
+          <span class="rule-gold"></span>
+          <p class="eyebrow !text-brand-gold">{{ t('common.contactUs') }}</p>
         </div>
+        <h2 class="display-2 mt-6 text-white">{{ t('home.ctaTitle') }}</h2>
+        <p class="lead mt-6 text-slate-300 max-w-2xl">{{ t('home.ctaText') }}</p>
+      </div>
+      <div class="lg:col-span-4 flex lg:justify-end">
+        <RouterLink to="/contact" class="btn bg-brand-gold text-brand-ink hover:bg-white">
+          {{ t('common.contactUs') }} →
+        </RouterLink>
       </div>
     </div>
   </section>
