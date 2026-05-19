@@ -1,0 +1,65 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-brand-gold: #c8932f;
+  --color-brand-gold-dark: #a4761e;
+  --color-brand-red: #d62828;
+  --color-brand-blue: #1e3a8a;
+  --color-brand-ink: #0f172a;
+  --color-brand-cream: #fdf8ef;
+
+  --font-sans: 'Inter', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto,
+    'Helvetica Neue', Arial, sans-serif;
+  --font-display: 'Poppins', 'Inter', ui-sans-serif, system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-white text-brand-ink font-sans antialiased;
+  }
+
+  h1, h2, h3, h4 {
+    @apply font-display;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3 text-sm font-semibold
+      transition-all duration-200 focus-visible:outline-none focus-visible:ring-2
+      focus-visible:ring-offset-2 focus-visible:ring-brand-gold;
+  }
+  .btn-primary {
+    @apply btn bg-brand-gold text-white hover:bg-brand-gold-dark shadow-sm hover:shadow-md;
+  }
+  .btn-secondary {
+    @apply btn bg-brand-blue text-white hover:bg-brand-ink;
+  }
+  .btn-ghost {
+    @apply btn border border-brand-gold/40 text-brand-ink hover:bg-brand-cream;
+  }
+
+  .container-page {
+    @apply mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8;
+  }
+
+  .section {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .section-title {
+    @apply font-display text-3xl sm:text-4xl font-bold text-brand-ink;
+  }
+  .section-subtitle {
+    @apply mt-3 text-base sm:text-lg text-slate-600 max-w-2xl;
+  }
+
+  .card {
+    @apply rounded-2xl border border-slate-200 bg-white p-6 shadow-sm transition
+      hover:shadow-lg hover:-translate-y-0.5;
+  }
+}
