@@ -35,7 +35,7 @@ watch(() => route.fullPath, closeMenu)
         <img
           :src="company.logo"
           alt="EYANO GROUP"
-          class="h-12 w-12 rounded-full object-cover ring-1 ring-brand-ink/10"
+          class="h-12 w-auto object-contain"
         />
       </RouterLink>
 
