@@ -36,16 +36,6 @@ const { t } = useI18n()
     </div>
   </section>
 
-  <!-- SLOGAN BAR -->
-  <section class="bg-brand-ink text-white">
-    <div class="container-page py-10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-      <p class="font-display text-2xl sm:text-3xl text-white leading-tight">
-        « {{ t('company.slogan') }} »
-      </p>
-      <img :src="company.logo" alt="EYANO GROUP" class="h-16 w-auto object-contain" />
-    </div>
-  </section>
-
   <!-- ABOUT — editorial split -->
   <section class="section">
     <div class="container-page grid lg:grid-cols-12 gap-12">
